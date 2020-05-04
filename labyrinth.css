@@ -6,8 +6,6 @@
 .labyrinth {
 	display: flex;
 	flex-direction: column;
-	width: 500px;
-	height: 500px;
 	margin: 0 auto;
 }
 .row {
@@ -17,7 +15,7 @@
 
 }
 .cell {
-	border: 3px solid black;
+	border: 2px solid black;
 	width:50px;
 	height: 100%;
 	text-align: center;
@@ -35,3 +33,21 @@
 .cell.b-right {border-right-width: 0px}
 .cell.b-top {border-top-width: 0px}
 .cell.b-bottom {border-bottom-width: 0px}
+
+
+.inputs {
+	width: 500px;
+	display: flex;
+	justify-content: center;
+	height: auto;
+	margin: 0 auto;
+	font-size: 30px;
+}
+#cols,#rows {
+	margin:0 auto;
+}
+#start {
+	margin: 5px auto;
+	display: block;
+	font-size: 30px;
+}

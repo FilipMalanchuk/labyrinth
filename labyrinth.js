@@ -1,7 +1,17 @@
-var rows = 10;
-var cols = 10;
+var rows = 20;
+var cols = 20;
+var cellsize = 50;
+
+document.getElementById("start").addEventListener("click", function() {
+	cols = document.getElementById("cols").value
+	cellsize = document.getElementById("cellsize").value
+	rows = document.getElementById("rows").value
+	Generate()
+})
 
 
+function Generate() {
+	document.querySelector(".labyrinth").innerHTML = "";
 
 // генерация поля
 
@@ -15,6 +25,10 @@ for(let i = 0;i<rows;i++) {
 		document.querySelector(".row div").classList.add(`row${rows-i}`)
 	}
 }
+
+document.querySelector(".labyrinth").style.cssText = `width:${cols*cellsize}px;height:${rows*cellsize}px;`
+document.querySelectorAll(".cell").forEach(item => item.style.cssText = `width:${cellsize}px`)
+document.querySelectorAll(".row").forEach(item => item.style.cssText = `height:${cellsize}px`)
 
 
 // генерация входа и выхода 
@@ -32,15 +46,15 @@ endRow.children[cols - 1].classList.add("end")
 
 
 	// проход всего лабиринта
-let start = document.querySelector(".start")
+	let start = document.querySelector(".start")
 
-function move (elem) {
-	if (elem.className.indexOf("done") === -1) {
-		console.log()
+	function move (elem) {
+		if (elem.className.indexOf("done") === -1) {
+			console.log()
 
-		let curCol = Number(elem.className.split(" ").filter(item => item.indexOf("col") !== -1)[0].substr("3"))
-		let curRow = Number(elem.className.split(" ").filter(item => item.indexOf("row") !== -1)[0].substr("3"))
-		elem.classList.add("done");
+			let curCol = Number(elem.className.split(" ").filter(item => item.indexOf("col") !== -1)[0].substr("3"))
+			let curRow = Number(elem.className.split(" ").filter(item => item.indexOf("row") !== -1)[0].substr("3"))
+			elem.classList.add("done");
 		// addNumber(elem) <-отключенный счетчик
 		let colAround = [curCol-1,curCol+1];
 		let rowAround = [curRow-1,curRow+1];
@@ -67,22 +81,22 @@ function move (elem) {
 		if(elemArr.length ===0) {return}
 
 			//запуск по всем элементам массива текущей функции + удаление бордеров
-			elemArr.sort(()=>Math.random() -0.5)
+		elemArr.sort(()=>Math.random() -0.5)
 
-			for(let i =0;i<elemArr.length;i++) {
-				move(elemArr[i])
-				removeBorder(elem,elemArr[i])
-			}
+		for(let i =0;i<elemArr.length;i++) {
+			move(elemArr[i])
+			removeBorder(elem,elemArr[i])
+		}
 	}
 
 }
 
 	// нумерация клеток(будет отключена позже)
-var count = 0;
-function addNumber(item) {
-	item.innerText  = count
-	count++
-}
+	var count = 0;
+	function addNumber(item) {
+		item.innerText  = count
+		count++
+	}
 
 
 /////////////////////////////////// первичный запуск 
@@ -114,4 +128,5 @@ function removeBorder(item1,item2) {
 		} 
 		item2.classList.add("bremoved")
 	}
+}
 }
